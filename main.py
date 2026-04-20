@@ -4,6 +4,7 @@ import tempfile
 from pathlib import Path
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -12,6 +13,13 @@ from docx import Document
 from striprtf.striprtf import rtf_to_text
 
 app = FastAPI(title="Document Reader")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://product-builder-5cp.pages.dev"],
+    allow_methods=["POST"],
+    allow_headers=["*"],
+)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
