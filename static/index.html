@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Reader</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Document Reader</h1>
+      <p class="subtitle">Upload a document and have it read aloud to you</p>
+    </header>
+
+    <!-- Upload Section -->
+    <section id="upload-section">
+      <label id="drop-zone" for="file-input">
+        <div class="drop-icon">📄</div>
+        <div class="drop-text">Drop your document here</div>
+        <div class="drop-sub">or click to browse</div>
+        <div class="drop-formats">PDF · DOCX · DOC · RTF · TXT</div>
+        <input type="file" id="file-input" accept=".pdf,.docx,.doc,.rtf,.txt" hidden />
+      </label>
+      <div id="upload-error" class="error-msg" hidden></div>
+    </section>
+
+    <!-- Reader Section -->
+    <section id="reader-section" hidden>
+      <div id="controls-bar">
+        <div class="control-group">
+          <button id="btn-play" class="btn btn-primary" title="Play (Space)">▶ Play</button>
+          <button id="btn-pause" class="btn" title="Pause (Space)" hidden>⏸ Pause</button>
+          <button id="btn-stop" class="btn" title="Stop">⏹ Stop</button>
+        </div>
+
+        <div class="control-group">
+          <label for="speed-slider">Speed</label>
+          <input type="range" id="speed-slider" min="0.5" max="2" step="0.1" value="1" />
+          <span id="speed-label">1.0×</span>
+        </div>
+
+        <div class="control-group">
+          <label for="font-slider">Text Size</label>
+          <input type="range" id="font-slider" min="16" max="48" step="2" value="22" />
+          <span id="font-label">22px</span>
+        </div>
+
+        <div class="control-group">
+          <label for="voice-select">Voice</label>
+          <select id="voice-select"></select>
+        </div>
+
+        <div class="control-group">
+          <button id="btn-contrast" class="btn">High Contrast</button>
+          <button id="btn-new" class="btn">New Document</button>
+        </div>
+      </div>
+
+      <div id="progress-bar-wrap">
+        <div id="progress-bar"></div>
+      </div>
+
+      <div id="doc-title"></div>
+      <div id="text-display"></div>
+    </section>
+
+    <div id="loading" hidden>
+      <div class="spinner"></div>
+      <p>Extracting text…</p>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
